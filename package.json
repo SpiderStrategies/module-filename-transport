@@ -1,0 +1,21 @@
+{
+  "name": "module-filename-transform",
+  "version": "1.0.0",
+  "description": "Adds a __filename__ to module.exports",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "author": "Nathan Bowser <nathan.bowser@spiderstrategies.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpiderStrategies/module-filename-transform/issues"
+  },
+  "homepage": "https://github.com/SpiderStrategies/module-filename-transform",
+  "dependencies": {
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "tape": "^4.4.0"
+  }
+}
