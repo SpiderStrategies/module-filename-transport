@@ -1,6 +1,6 @@
 {
   "name": "module-filename-transform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Adds a __filename__ to module.exports",
   "main": "index.js",
   "scripts": {
