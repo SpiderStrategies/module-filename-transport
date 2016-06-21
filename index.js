@@ -12,7 +12,7 @@ module.exports = function (file, opts) {
     data += buf
     next()
   }, function (next) {
-    var f = file.replace(/\\/gi, '\\\\')
+    var f = file.replace(/\\/gi, '/') // Replace windows back slashes with forward slashes because browserify transform seem to choke with escaping correctly
     this.push(data)
     this.push(' \nmodule.exports.__filename__ = "' + (opts.stripCwd ? path.relative(process.cwd(), f) : f) + '"\n ')
     this.push(null)

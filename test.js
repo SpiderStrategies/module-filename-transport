@@ -63,7 +63,7 @@ test('escapes quotes on windows', function (t) {
         data += d
       })
       .on('end', function () {
-        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "scripts\\\\foo.js"\n ', '__filename__ exported')
+        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "scripts/foo.js"\n ', '__filename__ exported')
         t.end()
       })
 })
