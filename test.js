@@ -55,3 +55,15 @@ test('strips cwd from filename export', function (t) {
         t.end()
       })
 })
+
+test('escapes quotes on windows', function (t) {
+  var data = ''
+  rs().pipe(transform('scripts\\foo.js', {}))
+      .on('data', function (d) {
+        data += d
+      })
+      .on('end', function () {
+        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "scripts\\\\foo.js"\n ', '__filename__ exported')
+        t.end()
+      })
+})
