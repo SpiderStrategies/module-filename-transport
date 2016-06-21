@@ -1,5 +1,6 @@
 var fs = require('fs')
   , transform = require('./')
+  , path = require('path')
   , test = require('tape').test
   , Readable = require('stream').Readable
 
@@ -27,7 +28,7 @@ test('ignores non-js files', function (t) {
 
 test('appends full path as __filename__ on module.exports', function (t) {
   var data = ''
-    , filename = process.cwd() + '/foo.js'
+    , filename = path.join(process.cwd(), 'foo.js')
 
   rs().pipe(transform(filename, {}))
       .on('data', function (d) {
@@ -41,14 +42,16 @@ test('appends full path as __filename__ on module.exports', function (t) {
 
 test('strips cwd from filename export', function (t) {
   var data = ''
-  rs().pipe(transform(process.cwd() + '/scripts/foo.js', {
+    , out = path.join('scripts', 'foo.js')
+
+  rs().pipe(transform(path.join(process.cwd(), 'scripts', 'foo.js'), {
         stripCwd: true
       }))
       .on('data', function (d) {
         data += d
       })
       .on('end', function () {
-        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "scripts/foo.js"\n ', '__filename__ exported')
+        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "' + out + '"\n ', '__filename__ exported')
         t.end()
       })
 })
