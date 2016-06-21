@@ -12,8 +12,9 @@ module.exports = function (file, opts) {
     data += buf
     next()
   }, function (next) {
+    var f = file.replace(/\\/gi, '\\\\')
     this.push(data)
-    this.push(' \nmodule.exports.__filename__ = "' + (opts.stripCwd ? path.relative(process.cwd(), file) : file) + '"\n ')
+    this.push(' \nmodule.exports.__filename__ = "' + (opts.stripCwd ? path.relative(process.cwd(), f) : f) + '"\n ')
     this.push(null)
     next()
   })
