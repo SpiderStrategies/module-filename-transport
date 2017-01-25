@@ -35,7 +35,7 @@ test('appends full path as __filename__ on module.exports', function (t) {
         data += d
       })
       .on('end', function () {
-        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "' + filename + '"\n ', '__filename__ exported')
+        t.equal(data, 'module.exports = function () {} \nif (module && module.exports) { module.exports.__filename__ = "' + filename + '" }\n ', '__filename__ exported')
         t.end()
       })
 })
@@ -51,7 +51,7 @@ test('strips cwd from filename export', function (t) {
         data += d
       })
       .on('end', function () {
-        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "' + out + '"\n ', '__filename__ exported')
+        t.equal(data, 'module.exports = function () {} \nif (module && module.exports) { module.exports.__filename__ = "' + out + '" }\n ', '__filename__ exported')
         t.end()
       })
 })
@@ -63,7 +63,7 @@ test('escapes quotes on windows', function (t) {
         data += d
       })
       .on('end', function () {
-        t.equal(data, 'module.exports = function () {} \nmodule.exports.__filename__ = "scripts/foo.js"\n ', '__filename__ exported')
+        t.equal(data, 'module.exports = function () {} \nif (module && module.exports) { module.exports.__filename__ = "scripts/foo.js" }\n ', '__filename__ exported')
         t.end()
       })
 })
